@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="desktop">
+<div class="icon" onclick="openWindow('notes')">
+<div class="icon-box">📝</div>
+<div class="icon-label">Notepad</div>
+</div>
+<div class="icon" onclick="openWindow('calc')">
+<div class="icon-box">🧮</div>
+<div class="icon-label">Calculator</div>
+</div>
+<div class="icon" onclick="openWindow('paint')">
+<div class="icon-box">🎨</div>
+<div class="icon-label">Paint</div>
+</div>
+<div class="icon" onclick="openWindow('browser')">
+<div class="icon-box">🌐</div>
+<div class="icon-label">Browser</div>
+</div>
+<div class="icon" onclick="openWindow('clock')">
+<div class="icon-box">⏰</div>
+<div class="icon-label">Clock</div>
+</div>
+<div class="icon" onclick="openWindow('terminal')">
+<div class="icon-box">💻</div>
+<div class="icon-label">Terminal</div>
+</div>
+<div class="icon" onclick="openWindow('files')">
+<div class="icon-box">📁</div>
+<div class="icon-label">Files</div>
+</div>
+<div class="icon" onclick="openWindow('calendar')">
+<div class="icon-box">📅</div>
+<div class="icon-label">Calendar</div>
+</div>
+<div class="icon" onclick="openWindow('settings')">
+<div class="icon-box">⚙️</div>
+<div class="icon-label">Settings</div>
+</div>
+<div class="window" id="notes">
+<div class="titlebar" onmousedown="startDrag(event,'notes')">
+<span>Notepad</span>
+<div class="controls">
+<span onclick="minimize('notes')">─</span>
+<span onclick="maximize('notes')">□</span>
+<span onclick="closeWindow('notes')">✕</span>
+</div>
+</div>
+<div id="noteText" class="app-content" contenteditable="true"></div>
+</div>
+<div class="window" id="calc">
+<div class="titlebar" onmousedown="startDrag(event,'calc')">
+<span>Calculator</span>
+<div class="controls">
+<span onclick="minimize('calc')">─</span>
+<span onclick="maximize('calc')">□</span>
+<span onclick="closeWindow('calc')">✕</span>
+</div>
+</div>
+<input id="display" readonly>
+<div class="grid">
+<button onclick="press('7')">7</button>
+<button onclick="press('8')">8</button>
+<button onclick="press('9')">9</button>
+<button onclick="press('/')">÷</button>
+<button onclick="press('4')">4</button>
+<button onclick="press('5')">5</button>
+<button onclick="press('6')">6</button>
+<button onclick="press('*')">×</button>
+<button onclick="press('1')">1</button>
+<button onclick="press('2')">2</button>
+<button onclick="press('3')">3</button>
+<button onclick="press('-')">−</button>
+<button onclick="press('0')">0</button>
+<button onclick="press('.')">.</button>
+<button onclick="calc()">=</button>
+<button onclick="press('+')">+</button>
+<button class="clear" onclick="clearCalc()">Clear</button>
+</div>
+</div>
+<div class="window" id="paint">
+<div class="titlebar" onmousedown="startDrag(event,'paint')">
+<span>Paint</span>
+<div class="controls">
+<span onclick="minimize('paint')">─</span>
+<span onclick="maximize('paint')">□</span>
+<span onclick="closeWindow('paint')">✕</span>
+</div>
+</div>
+<div class="paint-tools">
+<button onclick="setTool('draw')">Draw</button>
+<button onclick="setTool('erase')">Erase</button>
+<button onclick="clearCanvas()">Clear</button>
+</div>
+<canvas id="canvas"></canvas>
+</div>
+<div class="window" id="browser">
+<div class="titlebar" onmousedown="startDrag(event,'browser')">
+<span>Browser</span>
+<div class="controls">
+<span onclick="minimize('browser')">─</span>
+<span onclick="maximize('browser')">□</span>
+<span onclick="closeWindow('browser')">✕</span>
+</div>
+</div>
+<div class="browser-top">
+<input id="url" placeholder="test">
+<button onclick="go()">Search</button>
+</div>
+<div id="page"></div>
+</div>
+<div class="window" id="clock">
+<div class="titlebar" onmousedown="startDrag(event,'clock')">
+<span>Clock</span>
+<div class="controls">
+<span onclick="minimize('clock')">─</span>
+<span onclick="maximize('clock')">□</span>
+<span onclick="closeWindow('clock')">✕</span>
+</div>
+</div>
+<div class="clock-body">
+<div id="time"></div>
+<div id="date"></div>
+</div>
+</div>
+<div class="window" id="terminal">
+<div class="titlebar" onmousedown="startDrag(event,'terminal')">
+<span>Terminal</span>
+<div class="controls">
+<span onclick="minimize('terminal')">─</span>
+<span onclick="maximize('terminal')">□</span>
+<span onclick="closeWindow('terminal')">✕</span>
+</div>
+</div>
+<div id="terminalOutput" class="terminal"></div>
+<input id="terminalInput" placeholder="type command..." onkeydown="terminalCommand(event)">
+</div>
+<div class="window" id="files">
+<div class="titlebar" onmousedown="startDrag(event,'files')">
+<span>File Explorer</span>
+<div class="controls">
+<span onclick="minimize('files')">─</span>
+<span onclick="maximize('files')">□</span>
+<span onclick="closeWindow('files')">✕</span>
+</div>
+</div>
+<div class="app-content">
+<h3>📁 This PC</h3>
+<ul>
+<li>Documents</li>
+<li>Downloads</li>
+<li>Pictures</li>
+<li>Apps</li>
+</ul>
+</div>
+</div>
+<div class="window" id="calendar">
+<div class="titlebar" onmousedown="startDrag(event,'calendar')">
+<span>Calendar</span>
+<div class="controls">
+<span onclick="minimize('calendar')">─</span>
+<span onclick="maximize('calendar')">□</span>
+<span onclick="closeWindow('calendar')">✕</span>
+</div>
+</div>
+<div id="calendarBody" class="calendar"></div>
+</div>
+<div class="window" id="settings">
+<div class="titlebar" onmousedown="startDrag(event,'settings')">
+<span>Settings</span>
+<div class="controls">
+<span onclick="minimize('settings')">─</span>
+<span onclick="maximize('settings')">□</span>
+<span onclick="closeWindow('settings')">✕</span>
+</div>
+</div>
+<div class="app-content">
+<p>⚙️ Settings coming soon... :P</p>
+</div>
+</div>
+</div>
+<div id="startMenu">
+<input id="startSearch" placeholder="Search apps...">
+<div class="pinned">
+<div onclick="openWindow('notes')">📝 Notepad</div>
+<div onclick="openWindow('calc')">🧮 Calculator</div>
+<div onclick="openWindow('paint')">🎨 Paint</div>
+<div onclick="openWindow('terminal')">💻 Terminal</div>
+<div onclick="openWindow('files')">📁 Files</div>
+<div onclick="openWindow('calendar')">📅 Calendar</div>
+</div>
+</div>
+<div id="taskbar">
+<button onclick="toggleStartMenu()">⊞</button>
+<div id="taskbarApps"></div>
+<div id="taskTime"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
