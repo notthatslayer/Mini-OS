@@ -1,4 +1,3 @@
-:::writing{variant="document" id="61842"}
 Mini OS
 
 A browser-based desktop environment built using HTML, CSS, AND JavaScript.
